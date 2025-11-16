@@ -2,21 +2,18 @@
 <odoo>
     <data noupdate="0">
         
-        <!-- TMS Categories -->
         <record id="module_category_tms" model="ir.module.category">
             <field name="name">Transportation Management</field>
             <field name="description">Manage transport operations</field>
             <field name="sequence">10</field>
         </record>
 
-        <!-- TMS User Group -->
         <record id="group_tms_user" model="res.groups">
             <field name="name">TMS User</field>
             <field name="category_id" ref="module_category_tms"/>
             <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
         </record>
 
-        <!-- TMS Manager Group -->
         <record id="group_tms_manager" model="res.groups">
             <field name="name">TMS Manager</field>
             <field name="category_id" ref="module_category_tms"/>

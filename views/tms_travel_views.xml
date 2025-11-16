@@ -2,7 +2,6 @@
 <odoo>
     <data>
         
-        <!-- Travel Form View -->
         <record id="view_tms_travel_form" model="ir.ui.view">
             <field name="name">tms.travel.form</field>
             <field name="model">tms.travel</field>
@@ -85,7 +84,6 @@
             </field>
         </record>
 
-        <!-- Travel Tree View -->
         <record id="view_tms_travel_tree" model="ir.ui.view">
             <field name="name">tms.travel.tree</field>
             <field name="model">tms.travel</field>
@@ -115,7 +113,6 @@
             </field>
         </record>
 
-        <!-- Travel Search View -->
         <record id="view_tms_travel_search" model="ir.ui.view">
             <field name="name">tms.travel.search</field>
             <field name="model">tms.travel</field>
@@ -144,7 +141,6 @@
             </field>
         </record>
 
-        <!-- Travel Kanban View -->
         <record id="view_tms_travel_kanban" model="ir.ui.view">
             <field name="name">tms.travel.kanban</field>
             <field name="model">tms.travel</field>
@@ -197,7 +193,6 @@
             </field>
         </record>
 
-        <!-- Travel Action -->
         <record id="action_tms_travel" model="ir.actions.act_window">
             <field name="name">Travels</field>
             <field name="res_model">tms.travel</field>

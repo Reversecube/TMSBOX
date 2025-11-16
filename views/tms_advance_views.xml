@@ -2,79 +2,6 @@
 <odoo>
     <data>
         
-        <!-- Advance Form View -->
-        <record id="view_tms_advance_form" model="ir.ui.view">
-            <field name="name">tms.advance.form</field>
-            <field name="model">tms.advance</field>
-            <field name="arch" type="xml">
-                <form string="Advance Payment">
-                    <header>
-                        <field name="state" widget="statusbar" statusbar_visible="draft,paid,reconciled"/>
-                    </header>
-                    <sheet>
-                        <div class="oe_title">
-                            <h1>
-                                <field name="name" readonly="1"/>
-                            </h1>
-                        </div>
-                        <group>
-                            <group>
-                                <field name="date"/>
-                                <field name="driver_id"/>
-                                <field name="travel_id"/>
-                            </group>
-                            <group>
-                                <field name="amount" widget="monetary"/>
-                                <field name="currency_id"/>
-                                <field name="payment_method"/>
-                                <field name="company_id" invisible="1"/>
-                            </group>
-                        </group>
-                        <notebook>
-                            <page string="Notes">
-                                <field name="notes" placeholder="Advance notes..."/>
-                            </page>
-                        </notebook>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <!-- Advance Tree View -->
-        <record id="view_tms_advance_tree" model="ir.ui.view">
-            <field name="name">tms.advance.tree</field>
-            <field name="model">tms.advance</field>
-            <field name="arch" type="xml">
-                <tree string="Advances">
-                    <field name="name"/>
-                    <field name="date"/>
-                    <field name="driver_id"/>
-                    <field name="amount" widget="monetary"/>
-                    <field name="state" widget="badge"/>
-                </tree>
-            </field>
-        </record>
-
-        <!-- Advance Action -->
-        <record id="action_tms_advance" model="ir.actions.act_window">
-            <field name="name">Advances</field>
-            <field name="res_model">tms.advance</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Create your first Advance Payment
-                </p>
-            </field>
-        </record>
-
-    </data>
-</odoo>
-
-<!-- <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <data>
-        
-        <!-- Advance Form View -->
         <record id="view_tms_advance_form" model="ir.ui.view">
             <field name="name">tms.advance.form</field>
             <field name="model">tms.advance</field>
@@ -126,7 +53,6 @@
             </field>
         </record>
 
-        <!-- Advance Tree View -->
         <record id="view_tms_advance_tree" model="ir.ui.view">
             <field name="name">tms.advance.tree</field>
             <field name="model">tms.advance</field>
@@ -150,7 +76,6 @@
             </field>
         </record>
 
-        <!-- Advance Search View -->
         <record id="view_tms_advance_search" model="ir.ui.view">
             <field name="name">tms.advance.search</field>
             <field name="model">tms.advance</field>
@@ -176,7 +101,6 @@
             </field>
         </record>
 
-        <!-- Advance Action -->
         <record id="action_tms_advance" model="ir.actions.act_window">
             <field name="name">Advances</field>
             <field name="res_model">tms.advance</field>
@@ -193,4 +117,4 @@
         </record>
 
     </data>
-</odoo> -->
+</odoo>
