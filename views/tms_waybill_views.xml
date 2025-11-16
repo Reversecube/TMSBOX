@@ -2,6 +2,7 @@
 <odoo>
     <data>
         
+        <!-- Waybill Form View -->
         <record id="view_tms_waybill_form" model="ir.ui.view">
             <field name="name">tms.waybill.form</field>
             <field name="model">tms.waybill</field>
@@ -64,6 +65,7 @@
             </field>
         </record>
 
+        <!-- Waybill Tree View -->
         <record id="view_tms_waybill_tree" model="ir.ui.view">
             <field name="name">tms.waybill.tree</field>
             <field name="model">tms.waybill</field>
@@ -82,6 +84,7 @@
             </field>
         </record>
 
+        <!-- Waybill Search View -->
         <record id="view_tms_waybill_search" model="ir.ui.view">
             <field name="name">tms.waybill.search</field>
             <field name="model">tms.waybill</field>
@@ -103,6 +106,7 @@
             </field>
         </record>
 
+        <!-- Waybill Action -->
         <record id="action_tms_waybill" model="ir.actions.act_window">
             <field name="name">Waybills</field>
             <field name="res_model">tms.waybill</field>

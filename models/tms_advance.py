@@ -1,33 +1,84 @@
-from odoo import models, fields
+from odoo import models, fields, api, _
 
 
-class TMSExpense(models.Model):
-    _name = 'tms.expense'
-    _description = 'TMS Expense'
+class TMSAdvance(models.Model):
+    _name = 'tms.advance'
+    _description = 'TMS Advance Payment'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = 'date desc, id desc'
 
-    name = fields.Char('Description', required=True)
-    date = fields.Date('Date', required=True, default=fields.Date.context_today)
-    expense_type = fields.Selection([
-        ('fuel', 'Fuel'),
-        ('toll', 'Toll'),
-        ('maintenance', 'Maintenance'),
-        ('parking', 'Parking'),
-        ('meal', 'Meal'),
-        ('accommodation', 'Accommodation'),
-        ('other', 'Other')
-    ], required=True)
-    amount = fields.Monetary('Amount', required=True)
-    currency_id = fields.Many2one('res.currency', default=lambda self: self.env.company.currency_id)
-    travel_id = fields.Many2one('tms.travel', 'Travel')
-    waybill_id = fields.Many2one('tms.waybill', 'Waybill')
-    driver_id = fields.Many2one('res.partner', 'Driver')
-    vehicle_id = fields.Many2one('fleet.vehicle', 'Vehicle')
+    name = fields.Char(
+        string='Reference',
+        required=True,
+        copy=False,
+        readonly=True,
+        default=lambda self: _('New'),
+        tracking=True
+    )
+    date = fields.Date(
+        string='Date',
+        required=True,
+        default=fields.Date.context_today,
+        tracking=True
+    )
+    driver_id = fields.Many2one(
+        'res.partner',
+        string='Driver',
+        required=True,
+        domain=[('is_driver', '=', True)],
+        tracking=True
+    )
+    travel_id = fields.Many2one(
+        'tms.travel',
+        string='Travel',
+        tracking=True
+    )
+    amount = fields.Monetary(
+        string='Amount',
+        required=True,
+        currency_field='currency_id',
+        tracking=True
+    )
+    currency_id = fields.Many2one(
+        'res.currency',
+        string='Currency',
+        default=lambda self: self.env.company.currency_id
+    )
+    payment_method = fields.Selection([
+        ('cash', 'Cash'),
+        ('bank_transfer', 'Bank Transfer'),
+        ('check', 'Check'),
+        ('card', 'Card')
+    ], string='Payment Method', required=True, default='cash', tracking=True)
+    
     state = fields.Selection([
         ('draft', 'Draft'),
-        ('submitted', 'Submitted'),
-        ('approved', 'Approved'),
         ('paid', 'Paid'),
-        ('rejected', 'Rejected')
-    ], default='draft')
-    notes = fields.Text('Notes')
-    company_id = fields.Many2one('res.company', default=lambda self: self.env.company)
+        ('reconciled', 'Reconciled'),
+        ('cancelled', 'Cancelled')
+    ], string='Status', default='draft', tracking=True)
+    
+    notes = fields.Text(string='Notes')
+    company_id = fields.Many2one(
+        'res.company',
+        string='Company',
+        default=lambda self: self.env.company
+    )
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', _('New')) == _('New'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('tms.advance') or _('New')
+        return super(TMSAdvance, self).create(vals)
+
+    def action_pay(self):
+        self.write({'state': 'paid'})
+
+    def action_reconcile(self):
+        self.write({'state': 'reconciled'})
+
+    def action_cancel(self):
+        self.write({'state': 'cancelled'})
+
+    def action_reset_to_draft(self):
+        self.write({'state': 'draft'})

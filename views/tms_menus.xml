@@ -2,11 +2,13 @@
 <odoo>
     <data>
         
+        <!-- Root Menu -->
         <menuitem id="menu_tms_root" 
                   name="TMSBOX" 
                   web_icon="tmsbox_reversecube,static/description/icon.png"
                   sequence="5"/>
 
+        <!-- Operations Menu -->
         <menuitem id="menu_tms_operations" 
                   name="Operations" 
                   parent="menu_tms_root" 
@@ -36,6 +38,7 @@
                   action="action_tms_advance" 
                   sequence="40"/>
 
+        <!-- Configuration Menu -->
         <menuitem id="menu_tms_configuration" 
                   name="Configuration" 
                   parent="menu_tms_root" 
