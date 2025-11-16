@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMSBOX - Transportation Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .header .version {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 60px 40px;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .section h3 {
+            font-size: 1.8em;
+            color: #764ba2;
+            margin: 30px 0 20px;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-card .icon {
+            font-size: 3em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1em;
+            color: #666;
+            text-align: left;
+        }
+
+        /* Benefits Section */
+        .benefits-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .benefits-list li {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #764ba2;
+            font-size: 1.1em;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+
+        .benefits-list li:hover {
+            border-left-width: 8px;
+            padding-left: 24px;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.2);
+        }
+
+        .benefits-list li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 15px;
+        }
+
+        /* Installation Steps */
+        .steps {
+            counter-reset: step-counter;
+            margin-top: 30px;
+        }
+
+        .step {
+            background: #fff;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            position: relative;
+            padding-left: 80px;
+            counter-increment: step-counter;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+
+        .step:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .footer h3 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #ecf0f1;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .header .subtitle {
+                font-size: 1.2em;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card, .step, .benefits-list li {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .step:nth-child(1) { animation-delay: 0.1s; }
+        .step:nth-child(2) { animation-delay: 0.2s; }
+        .step:nth-child(3) { animation-delay: 0.3s; }
+        .step:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>🚚 TMSBOX</h1>
+            <div class="subtitle">Transportation Management System</div>
+            <div class="version">Version 18.0.1.0.0 | Odoo 18 Compatible</div>
+            <p style="margin-top: 20px; font-size: 1.1em;">By <strong>Reversecube</strong></p>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="section">
+            <h2>Overview</h2>
+            <p>
+                TMSBOX is a comprehensive Transportation Management System designed specifically for Odoo 18. 
+                It provides complete control over your logistics operations, from waybill creation to financial 
+                analysis, helping you optimize routes, track expenses, and maximize profitability.
+            </p>
+            <p>
+                Whether you're managing a small fleet or a large logistics operation, TMSBOX offers the tools 
+                you need to streamline operations, reduce costs, and improve service delivery. With its intuitive 
+                interface and powerful features, managing your transportation business has never been easier.
+            </p>
+        </div>
+
+        <!-- Features Section -->
+        <div class="section">
+            <h2>Core Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">📋</div>
+                    <h4>Waybill Management</h4>
+                    <p>Create and track waybills with complete cargo details, pricing, and delivery status. Monitor shipments from origin to destination with real-time updates.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🚗</div>
+                    <h4>Travel Planning</h4>
+                    <p>Plan and manage complete journeys with multiple waybills. Track odometer readings, calculate distances, and monitor travel progress efficiently.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🗺️</div>
+                    <h4>Route Management</h4>
+                    <p>Define routes with waypoints, distances, and estimated durations. Optimize your logistics operations with predefined route templates.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🚛</div>
+                    <h4>Transport Units</h4>
+                    <p>Manage trucks, trailers, containers, and other transport units. Track capacity, availability, and maintenance status in real-time.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">💰</div>
+                    <h4>Expense Tracking</h4>
+                    <p>Monitor all travel expenses including fuel, tolls, maintenance, meals, and accommodation. Categorize and approve expenses with workflow management.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">💵</div>
+                    <h4>Advance Payments</h4>
+                    <p>Track driver advances and reconcile them against expenses. Support multiple payment methods with complete audit trail.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">📊</div>
+                    <h4>Financial Analysis</h4>
+                    <p>Real-time profit/loss calculations for each travel. Generate comprehensive reports to analyze revenue, expenses, and profitability.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🔗</div>
+                    <h4>Full Integration</h4>
+                    <p>Seamlessly integrates with Odoo's Fleet, Contacts, Accounting, Sales, Purchase, and Stock modules for unified operations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🏢</div>
+                    <h4>Multi-Company</h4>
+                    <p>Full support for Odoo's multi-company feature. Manage multiple logistics operations from a single installation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="section">
+            <h2>Key Benefits</h2>
+            <ul class="benefits-list">
+                <li>Reduce operational costs through better expense tracking and route optimization</li>
+                <li>Improve delivery times with efficient travel and route planning</li>
+                <li>Increase profitability with real-time financial analysis and reporting</li>
+                <li>Enhance driver accountability through advance payments and expense reconciliation</li>
+                <li>Streamline operations with automated workflows and status tracking</li>
+                <li>Make data-driven decisions with comprehensive analytics and insights</li>
+                <li>Improve customer satisfaction with accurate tracking and timely deliveries</li>
+                <li>Scale your business effortlessly with flexible configuration options</li>
+                <li>Ensure compliance with complete audit trails and approval workflows</li>
+                <li>Access your data anywhere with Odoo's cloud and mobile capabilities</li>
+            </ul>
+        </div>
+
+        <!-- Technical Features Section -->
+        <div class="section">
+            <h2>Technical Features</h2>
+            <div class="tech-stack">
+                <span class="tech-badge">Odoo 18 Compatible</span>
+                <span class="tech-badge">Python 3.10+</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">Responsive Design</span>
+                <span class="tech-badge">Kanban Views</span>
+                <span class="tech-badge">Chatter Integration</span>
+                <span class="tech-badge">Activity Management</span>
+                <span class="tech-badge">Multi-Currency</span>
+                <span class="tech-badge">Workflow Automation</span>
+                <span class="tech-badge">Access Rights</span>
+                <span class="tech-badge">Report Generation</span>
+                <span class="tech-badge">API Ready</span>
+            </div>
+
+            <h3 style="margin-top: 50px; text-align: center;">Module Architecture</h3>
+            <ul class="benefits-list">
+                <li><strong>MVC Architecture:</strong> Clean separation of models, views, and controllers</li>
+                <li><strong>Security Groups:</strong> TMS User and TMS Manager roles with granular permissions</li>
+                <li><strong>Automated Sequences:</strong> Auto-generated waybill, travel, and advance numbers</li>
+                <li><strong>State Management:</strong> Workflow-based status transitions with validation</li>
+                <li><strong>Computed Fields:</strong> Real-time calculations for totals, profits, and distances</li>
+                <li><strong>Relational Data:</strong> Proper foreign keys and cascade rules for data integrity</li>
+                <li><strong>Audit Trail:</strong> Complete tracking with Chatter and activity management</li>
+                <li><strong>Search & Filters:</strong> Advanced search views with grouping and filtering options</li>
+            </ul>
+        </div>
+
+        <!-- Installation Section -->
+        <div class="section">
+            <h2>Installation Guide</h2>
+            <div class="steps">
+                <div class="step">
+                    <strong>Copy Module Files</strong><br>
+                    Copy the <code>tmsbox_reversecube</code> folder to your Odoo addons directory (e.g., <code>/var/www/html/reversecube/odoo-dev/addons/</code>)
+                </div>
+                <div class="step">
+                    <strong>Update Apps List</strong><br>
+                    Go to Settings → Apps → Update Apps List. Make sure you're in developer mode to see the update option.
+                </div>
+                <div class="step">
+                    <strong>Install TMSBOX</strong><br>
+                    Search for "TMSBOX" in the Apps menu and click the Install button. Wait for the installation to complete.
+                </div>
+                <div class="step">
+                    <strong>Configure Settings</strong><br>
+                    Navigate to TMSBOX menu, configure your routes, transport units, and start creating waybills and travels!
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Section -->
+        <div class="section">
+            <h2>Quick Start Guide</h2>
+            
+            <h3>1. Initial Configuration</h3>
+            <p>
+                Start by setting up your basic configuration. Go to <strong>TMSBOX → Configuration → Routes</strong> 
+                to define your frequently used routes with waypoints and distances. Then add your transport units 
+                under <strong>Configuration → Transport Units</strong>.
+            </p>
+
+            <h3>2. Driver Setup</h3>
+            <p>
+                Ensure your drivers are properly configured in the Contacts module. Mark them as drivers by checking 
+                the appropriate field. This allows them to be selected in travels and waybills.
+            </p>
+
+            <h3>3. Creating Travels</h3>
+            <p>
+                Navigate to <strong>TMSBOX → Operations → Travels</strong> and create a new travel. Select the driver, 
+                vehicle, route, and record the starting odometer reading. Confirm the travel to begin operations.
+            </p>
+
+            <h3>4. Managing Waybills</h3>
+            <p>
+                Create waybills for each shipment within a travel. Add cargo details, customer information, origin, 
+                destination, and pricing. Track the waybill through draft, confirmed, in transit, and delivered states.
+            </p>
+
+            <h3>5. Tracking Expenses</h3>
+            <p>
+                Record all expenses related to the travel including fuel, tolls, maintenance, and meals. Link expenses 
+                to travels or specific waybills for accurate cost allocation.
+            </p>
+
+            <h3>6. Financial Analysis</h3>
+            <p>
+                View real-time profit/loss analysis on each travel. The system automatically calculates total revenue 
+                from waybills, total expenses, and net profit, helping you make informed business decisions.
+            </p>
+        </div>
+
+        <!-- Module Structure Section -->
+        <div class="section">
+            <h2>Module Structure</h2>
+            <p>The TMSBOX module consists of the following components:</p>
+            
+            <h3>Models</h3>
+            <ul class="benefits-list">
+                <li><strong>tms.waybill:</strong> Shipment documents with cargo details and pricing</li>
+                <li><strong>tms.travel:</strong> Complete journeys with multiple waybills</li>
+                <li><strong>tms.route:</strong> Predefined routes with waypoints</li>
+                <li><strong>tms.unit:</strong> Transport units (trucks, trailers, containers)</li>
+                <li><strong>tms.expense:</strong> Travel expenses with categorization</li>
+                <li><strong>tms.advance:</strong> Driver advance payments and reconciliation</li>
+            </ul>
+
+            <h3>Views</h3>
+            <ul class="benefits-list">
+                <li>Form views with statusbar workflows and smart buttons</li>
+                <li>Tree views with conditional formatting and summations</li>
+                <li>Kanban views for visual management</li>
+                <li>Advanced search views with filters and grouping</li>
+                <li>Chatter integration for communication and tracking</li>
+            </ul>
+        </div>
+
+        <!-- Support Section -->
+        <div class="section">
+            <h2>Support & Customization</h2>
+            <p>
+                TMSBOX is designed to be flexible and extensible. For customization requests, support, 
+                or feature additions, please contact the Reversecube team. We offer:
+            </p>
+            <ul class="benefits-list">
+                <li>Custom feature development tailored to your business needs</li>
+                <li>Integration with third-party logistics systems and APIs</li>
+                <li>Training and onboarding for your team</li>
+                <li>Technical support and bug fixes</li>
+                <li>Performance optimization and scaling</li>
+                <li>Report customization and business intelligence</li>
+            </ul>
+        </div>
+
+        <!-- License Section -->
+        <div class="section">
+            <h2>License & Credits</h2>
+            <p>
+                <strong>License:</strong> LGPL-3<br>
+                <strong>Version:</strong> 18.0.1.0.0<br>
+                <strong>Odoo Version:</strong> 18.0 and above<br>
+                <strong>Developer:</strong> Reversecube<br>
+                <strong>Technical Name:</strong> tmsbox_reversecube
+            </p>
+            <p style="margin-top: 20px;">
+                This module is provided as-is without warranty. Always test in a development environment 
+                before deploying to production.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h3>TMSBOX by Reversecube</h3>
+            <p>Revolutionizing Transportation Management in Odoo</p>
+            <p>Contact: <a href="mailto:info@reversecube.com">info@reversecube.com</a></p>
+            <p style="margin-top: 20px; opacity: 0.8;">© 2025 Reversecube. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

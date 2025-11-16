@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Waybill Form View -->
+        <record id="view_tms_waybill_form" model="ir.ui.view">
+            <field name="name">tms.waybill.form</field>
+            <field name="model">tms.waybill</field>
+            <field name="arch" type="xml">
+                <form string="Waybill">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,in_transit,delivered"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="partner_id"/>
+                                <field name="driver_id"/>
+                                <field name="vehicle_id"/>
+                                <field name="route_id"/>
+                                <field name="travel_id"/>
+                            </group>
+                            <group>
+                                <field name="origin"/>
+                                <field name="destination"/>
+                                <field name="cargo_weight"/>
+                                <field name="cargo_volume"/>
+                                <field name="amount_total" widget="monetary"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Cargo Details">
+                                <field name="cargo_description" placeholder="Describe the cargo..."/>
+                            </page>
+                            <page string="Waybill Lines">
+                                <field name="line_ids">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="description"/>
+                                        <field name="quantity"/>
+                                        <field name="price_unit"/>
+                                        <field name="subtotal"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Notes">
+                                <field name="notes" placeholder="Additional notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Waybill Tree View -->
+        <record id="view_tms_waybill_tree" model="ir.ui.view">
+            <field name="name">tms.waybill.tree</field>
+            <field name="model">tms.waybill</field>
+            <field name="arch" type="xml">
+                <tree string="Waybills">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="partner_id"/>
+                    <field name="driver_id"/>
+                    <field name="vehicle_id"/>
+                    <field name="origin"/>
+                    <field name="destination"/>
+                    <field name="amount_total" widget="monetary"/>
+                    <field name="state" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Waybill Search View -->
+        <record id="view_tms_waybill_search" model="ir.ui.view">
+            <field name="name">tms.waybill.search</field>
+            <field name="model">tms.waybill</field>
+            <field name="arch" type="xml">
+                <search string="Search Waybills">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="driver_id"/>
+                    <field name="vehicle_id"/>
+                    <separator/>
+                    <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
+                    <filter string="Delivered" name="delivered" domain="[('state', '=', 'delivered')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Customer" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Waybill Action -->
+        <record id="action_tms_waybill" model="ir.actions.act_window">
+            <field name="name">Waybills</field>
+            <field name="res_model">tms.waybill</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first Waybill
+                </p>
+                <p>
+                    Waybills are used to track shipments and cargo from origin to destination.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

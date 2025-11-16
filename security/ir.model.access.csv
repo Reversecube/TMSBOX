@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_waybill_user,tms.waybill.user,model_tms_waybill,group_tms_user,1,1,1,0
+access_tms_waybill_manager,tms.waybill.manager,model_tms_waybill,group_tms_manager,1,1,1,1
+access_tms_waybill_line_user,tms.waybill.line.user,model_tms_waybill_line,group_tms_user,1,1,1,0
+access_tms_waybill_line_manager,tms.waybill.line.manager,model_tms_waybill_line,group_tms_manager,1,1,1,1
+access_tms_travel_user,tms.travel.user,model_tms_travel,group_tms_user,1,1,1,0
+access_tms_travel_manager,tms.travel.manager,model_tms_travel,group_tms_manager,1,1,1,1
+access_tms_route_user,tms.route.user,model_tms_route,group_tms_user,1,0,0,0
+access_tms_route_manager,tms.route.manager,model_tms_route,group_tms_manager,1,1,1,1
+access_tms_route_waypoint_user,tms.route.waypoint.user,model_tms_route_waypoint,group_tms_user,1,0,0,0
+access_tms_route_waypoint_manager,tms.route.waypoint.manager,model_tms_route_waypoint,group_tms_manager,1,1,1,1
+access_tms_unit_user,tms.unit.user,model_tms_unit,group_tms_user,1,0,0,0
+access_tms_unit_manager,tms.unit.manager,model_tms_unit,group_tms_manager,1,1,1,1
+access_tms_expense_user,tms.expense.user,model_tms_expense,group_tms_user,1,1,1,0
+access_tms_expense_manager,tms.expense.manager,model_tms_expense,group_tms_manager,1,1,1,1
+access_tms_advance_user,tms.advance.user,model_tms_advance,group_tms_user,1,1,1,0
+access_tms_advance_manager,tms.advance.manager,model_tms_advance,group_tms_manager,1,1,1,1
