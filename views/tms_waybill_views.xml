@@ -45,8 +45,8 @@
                             </group>
                         </group>
                         <notebook>
-                            <page string="Cargo Details">
-                                <field name="cargo_description" placeholder="Describe the cargo..."/>
+                            <page string="Cargo">
+                                <field name="cargo_description" placeholder="Describe cargo..."/>
                             </page>
                             <page string="Lines">
                                 <field name="line_ids">
@@ -79,7 +79,7 @@
             <field name="model">tms.waybill</field>
             <field name="arch" type="xml">
                 <tree string="Waybills">
-                    <field name="name" decoration-bf="1"/>
+                    <field name="name"/>
                     <field name="date"/>
                     <field name="partner_id"/>
                     <field name="driver_id"/>
