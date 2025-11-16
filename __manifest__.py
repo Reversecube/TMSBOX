@@ -10,7 +10,7 @@
         Complete TMS solution for logistics and fleet management.
     """,
     'author': 'Reversecube',
-    'website': 'https://www.reversecube.net',
+    'website': 'https://reversecube.net',
     'license': 'LGPL-3',
     'depends': [
         'base',
@@ -20,9 +20,9 @@
     ],
     'data': [
         'security/tms_security.xml',
-        'security/ir.model.access.csv',
         'views/tms_waybill_views.xml',
         'views/tms_menus.xml',
+        'security/ir.model.access.csv',
     ],
     'installable': True,
     'application': True,
